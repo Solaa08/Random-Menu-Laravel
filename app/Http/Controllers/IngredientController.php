@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IngredientRequest;
 use Illuminate\Http\Request;
 
 class IngredientController extends Controller
@@ -13,7 +14,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        return view('create');
+        return "index";
     }
 
     /**
@@ -23,18 +24,18 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        return response(view('create'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  IngredientRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IngredientRequest $request)
     {
-        //
+        return 'ok';
     }
 
     /**

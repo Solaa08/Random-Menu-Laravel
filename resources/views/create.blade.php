@@ -23,7 +23,7 @@
       </div><br />
     @endif
 
-      <form method="post" action="{{ route('') }}">
+      <form method="post" action="{{ route('ingredient.store') }}">
 .         @csrf
           <div class="form-group">
               <label for="type">Type d'ingrédient:</label>
@@ -38,4 +38,4 @@
       </form>
   </div>
 </div>
-@endsection 
+@endsection

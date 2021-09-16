@@ -1,7 +1,11 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\TableController;
+use App\Http\Controllers\IngredientController;
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +23,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/table', [App\Http\Controllers\TableController::class, 'index'])->name('table_index');
+Route::get('/table', [TableController::class, 'index'])->name('table_index');
 
-Route::get('/create', [App\Http\Controllers\IngredientController::class, 'create'])->name('create');
+Route::resource('ingredient', IngredientController::class);
