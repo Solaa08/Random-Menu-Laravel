@@ -22,3 +22,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/table', [App\Http\Controllers\TableController::class, 'index'])->name('table_index');
+
+Route::get('/create', [App\Http\Controllers\IngredientController::class, 'create'])->name('create');
