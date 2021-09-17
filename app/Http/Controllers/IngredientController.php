@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\IngredientRequest;
 use Illuminate\Http\Request;
+use App\Models\Ingredient;
 
 class IngredientController extends Controller
 {
@@ -14,7 +15,9 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        return "index";
+        $voitures = Ingredient::all();
+
+        return view('indexadmin', compact('ingredients'));
     }
 
     /**
@@ -35,7 +38,9 @@ class IngredientController extends Controller
      */
     public function store(IngredientRequest $request)
     {
-        return 'ok';
+        $ingredient = Ingredient::create();
+
+        return redirect('ingredient/indexadmin')->with('success', 'Ingrédient crée avec succès');
     }
 
     /**
@@ -57,7 +62,9 @@ class IngredientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $ingredient = Ingredient::findOrFail($id);
+
+        return view('edit', compact('ingredient'));
     }
 
     /**
@@ -67,9 +74,9 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(IngredientRequest $request, $id)
     {
-        //
+        return redirect('/ingredient/indexadmin')->with('success', 'Ingrédient mis à jour avec succès');
     }
 
     /**
@@ -80,6 +87,9 @@ class IngredientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $ingredient = Ingredient::findOrFail($id);
+        $ingredient->delete();
+    
+        return redirect('/ingredient/indexadmin')->with('success', 'Voiture supprimée avec succès');
     }
 }
