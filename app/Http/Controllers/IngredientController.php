@@ -38,7 +38,12 @@ class IngredientController extends Controller
      */
     public function store(IngredientRequest $request)
     {
-        $ingredient = Ingredient::create();
+        $ingredient = Ingredient::create([
+            'nom'=>$request['name'],
+            'type_primaire'=>$request['type_primaire'],
+            'type_secondaire'=>$request['type_secondaire'],
+            'user_id'=>auth()->user()->getAuthIdentifier()
+        ]);
 
         return redirect('ingredient/indexadmin')->with('success', 'Ingrédient crée avec succès');
     }
@@ -64,7 +69,7 @@ class IngredientController extends Controller
     {
         $ingredient = Ingredient::findOrFail($id);
 
-        return view('edit', compact('ingredient'));
+        return response(view('edit', compact('ingredient')));
     }
 
     /**
@@ -89,7 +94,7 @@ class IngredientController extends Controller
     {
         $ingredient = Ingredient::findOrFail($id);
         $ingredient->delete();
-    
+
         return redirect('/ingredient/indexadmin')->with('success', 'Voiture supprimée avec succès');
     }
 }

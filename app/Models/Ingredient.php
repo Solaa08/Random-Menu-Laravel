@@ -10,5 +10,7 @@ class Ingredient extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['type', 'name'];
+    protected $table = 'ingredient';
+
+    protected $fillable = ['type_primaire','type_secondaire', 'nom', 'user_id'];
 }

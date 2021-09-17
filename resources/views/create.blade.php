@@ -26,8 +26,13 @@
       <form method="post" action="{{ route('ingredient.store') }}">
          @csrf
           <div class="form-group">
-              <label for="type">Type d'ingrédient:</label>
-              <input type="text" class="form-control" name="type"/>
+              <label for="type">Type primaire d'ingrédient:</label>
+              <input type="text" class="form-control" name="type_primaire"/>
+          </div>
+
+          <div class="form-group">
+              <label for="type">Type secondaire d'ingrédient:</label>
+              <input type="text" class="form-control" name="type_secondaire"/>
           </div>
 
           <div class="form-group">

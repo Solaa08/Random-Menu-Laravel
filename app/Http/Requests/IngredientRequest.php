@@ -24,7 +24,8 @@ class IngredientRequest extends FormRequest
     public function rules()
     {
         return [
-            'type'=>'required|String|max:100',
+            'type_primaire'=>'required|String|max:100',
+            'type_secondaire'=>'required|String|max:100',
             'name'=>'required|String|max:100'
         ];
     }
