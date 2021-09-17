@@ -15,7 +15,7 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $voitures = Ingredient::all();
+        $ingredients = Ingredient::all();
 
         return view('indexadmin', compact('ingredients'));
     }

@@ -12,7 +12,7 @@
 
   @if(session()->get('success'))
     <div class="alert alert-success">
-      {{ session()->get('success') }}  
+      {{ session()->get('success') }}
     </div><br />
   @endif
 
@@ -20,9 +20,10 @@
 
     <thead>
         <tr>
-          <td>ID</td>
-          <td>Type</td>
-          <td>Nom</td>
+            <td>ID</td>
+            <td>Nom</td>
+            <td>Type primaire</td>
+            <td>Type secondaire</td>
           <td colspan="2">Action</td>
         </tr>
     </thead>
@@ -31,8 +32,9 @@
         @foreach($ingredients as $ingredient)
         <tr>
             <td>{{$ingredient->id}}</td>
-            <td>{{$ingredient->type}}</td>
-            <td>{{$ingredient->name}}</td>
+            <td>{{$ingredient->nom}}</td>
+            <td>{{$ingredient->type_primaire}}</td>
+            <td>{{$ingredient->type_secondaire}}</td>
             <td><a href="{{ route('ingredient.edit', $ingredient->id)}}" class="btn btn-primary">Modifier</a></td>
             <td>
                 <form action="{{ route('ingredient.destroy', $ingredient->id)}}" method="post">
