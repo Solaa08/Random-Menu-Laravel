@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Menu extends Migration
+class RecetteContenu extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,18 @@ class Menu extends Migration
      */
     public function up()
     {
-        /*
-        Schema::create('menu', function (Blueprint $table) {
-            $table->integer('id')->unsigned()->index();
+        Schema::create('recette_contenu', function (Blueprint $table) {
+            $table->foreignId('ingredient_id')
+                ->references('id')
+                ->on('ingredient')
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('recette_id')
                 ->references('id')
                 ->on('recette')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->foreignId('user_id')
-                ->references('id')
-                ->on('users')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
         });
-        */
     }
 
     /**
@@ -37,9 +34,9 @@ class Menu extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menu');
-        Schema::table('menu', function (Blueprint $table) {
-            $table->dropForeign('user_id');
+        Schema::dropIfExists('recette_contenu');
+        Schema::table('recette_contenu', function (Blueprint $table) {
+            $table->dropForeign('ingredient_id');
             $table->dropForeign('recette_id');
         });
     }

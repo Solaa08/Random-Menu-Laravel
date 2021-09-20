@@ -10,7 +10,9 @@ class Recette extends Model
 {
     use HasFactory;
 
+    public static $type_recette = ["Entrée","Plat","Dessert"];
+
     protected $table = 'recette';
 
-    protected $fillable = ['url', 'ingredient_id', 'nom', 'user_id'];
+    protected $fillable = ['url', 'type', 'nom', 'user_id'];
 }

@@ -23,7 +23,7 @@
             <td>ID</td>
             <td>Nom</td>
             <td>url</td>
-            <td>id ingredient</td>
+            <td>type</td>
           <td colspan="2">Action</td>
         </tr>
     </thead>
@@ -34,7 +34,7 @@
             <td>{{$recette->id}}</td>
             <td>{{$recette->nom}}</td>
             <td>{{$recette->url}}</td>
-            <td>{{$recette->ingredient_id}}</td>
+            <td>{{$recette->type}}</td>
             <td><a href="{{ route('recette.edit', $recette->id)}}" class="btn btn-primary">Modifier</a></td>
             <td>
                 <form action="{{ route('recette.destroy', $recette->id)}}" method="post">

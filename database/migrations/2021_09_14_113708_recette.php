@@ -14,19 +14,16 @@ class Recette extends Migration
     public function up()
     {
         Schema::create('recette', function (Blueprint $table) {
-            $table->bigInteger('id')->unsigned()->index();
+            $table->id();
             $table->string('nom');
             $table->string('url')->nullable()->default(null);
-            $table->foreignId('ingredient_id')
-                ->references('id')
-                ->on('ingredient')
-                ->onUpdate('cascade')
-                ->onDelete('cascade');
+            $table->string('type');
             $table->foreignId('user_id')
                 ->references('id')
                 ->on('users')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
+            $table->timestamps();
         });
     }
 

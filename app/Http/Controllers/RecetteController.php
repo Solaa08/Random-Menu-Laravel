@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RecetteRequest;
+use App\Models\Ingredient;
 use Illuminate\Http\Request;
 use App\Models\Recette;
+use Illuminate\Support\Facades\DB;
 
 class RecetteController extends Controller
 {
@@ -17,7 +19,7 @@ class RecetteController extends Controller
     {
         $recettes = Recette::all();
 
-        return view('indexrecette', compact('recettes'));
+        return response(view('recettes.indexrecette', compact('recettes')));
     }
 
     /**
@@ -27,7 +29,8 @@ class RecetteController extends Controller
      */
     public function create()
     {
-        return response(view('createrecette'));
+        $ingredients = Ingredient::all("id","nom","type_primaire","type_secondaire");
+        return response(view('recettes.createrecette')->with("types",Recette::$type_recette)->with("ingredients",$ingredients));
     }
 
     /**
@@ -38,14 +41,30 @@ class RecetteController extends Controller
      */
     public function store(RecetteRequest $request)
     {
-        $recette = Recette::create([
-            'nom'=>$request['name'],
-            'url'=>$request['url'],
-            'ingredient'=>$request['ingredient_id'],
-            'user_id'=>auth()->user()->getAuthIdentifier()
-        ]);
+        if (in_array($request['type'],Recette::$type_recette)){
+            $url = "<a href='".$request['url']."'>".$request['url']."</a>";
 
-        return redirect('recette')->with('success', 'Recette crée avec succès');
+            $recette = Recette::create([
+                'nom'=>$request['name'],
+                'url'=>$url,
+                'type'=>$request['type'],
+                'user_id'=>auth()->user()->getAuthIdentifier()
+            ]);
+
+            foreach ($request["ingredient_id"] as $ingre){
+                $data[] = array(
+                    'ingredient_id'=>$ingre,
+                    'recette_id'=>$recette->id
+                );
+            }
+
+            DB::table("recette_contenu")->insertOrIgnore($data);
+
+            return response(redirect('recette')->with('success', 'Recette crée avec succès'));
+        }
+        else{
+            return response(redirect('recette')->with('error', 'Type de recette inconnu.'));
+        }
     }
 
     /**
@@ -68,8 +87,8 @@ class RecetteController extends Controller
     public function edit($id)
     {
         $recette = Recette::findOrFail($id);
-        
-        return response(view('edit', compact('recette')));
+
+        return response(view('recettes.edit', compact('recette')));
     }
 
     /**
@@ -87,7 +106,7 @@ class RecetteController extends Controller
             'ingredient'=>$request['ingredient_id'],
             'user_id'=>auth()->user()->getAuthIdentifier()
         ]);
-        return redirect('/recette')->with('success', 'Recette mis à jour avec succès');
+        return response(redirect('recette')->with('success', 'Recette mis à jour avec succès'));
     }
 
     /**
@@ -101,6 +120,6 @@ class RecetteController extends Controller
         $recette = Recette::findOrFail($id);
         $recette->delete();
 
-        return redirect('/recette')->with('success', 'Recette supprimé avec succès');
+        return response(redirect('recette')->with('success', 'Recette supprimé avec succès'));
     }
 }

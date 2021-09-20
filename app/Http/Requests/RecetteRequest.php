@@ -24,8 +24,9 @@ class RecetteRequest extends FormRequest
     public function rules()
     {
         return [
-            'url'=>'required|String|max:255',
-            'ingredient_id'=>'required|String|max:100',
+            'url'=>'String|max:255',
+            'ingredient_id'=>'required',
+            'type'=>'required|String|max:100',
             'name'=>'required|String|max:100'
         ];
     }
