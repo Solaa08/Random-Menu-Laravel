@@ -12,7 +12,7 @@ class TableController extends Controller
         $days = $this->get_days();
         return view('table')->with('days',$days);
     }
-    
+
     public function get_days()
     {
         $mytime = Carbon::now();
@@ -21,7 +21,6 @@ class TableController extends Controller
             $mytime->add(1, 'day');
             $days[] =  $mytime->translatedFormat("l");
         }
-
         return $days;
     }
 }
