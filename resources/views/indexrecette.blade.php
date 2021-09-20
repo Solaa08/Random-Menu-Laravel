@@ -29,15 +29,15 @@
     </thead>
 
     <tbody>
-        @foreach($ingredients as $ingredient)
+        @foreach($recettes as $recette)
         <tr>
-            <td>{{$ingredient->id}}</td>
-            <td>{{$ingredient->nom}}</td>
-            <td>{{$ingredient->type_primaire}}</td>
-            <td>{{$ingredient->type_secondaire}}</td>
-            <td><a href="{{ route('ingredient.edit', $ingredient->id)}}" class="btn btn-primary">Modifier</a></td>
+            <td>{{$recette->id}}</td>
+            <td>{{$recette->nom}}</td>
+            <td>{{$recette->type_primaire}}</td>
+            <td>{{$recette->type_secondaire}}</td>
+            <td><a href="{{ route('recette.edit', $recette->id)}}" class="btn btn-primary">Modifier</a></td>
             <td>
-                <form action="{{ route('ingredient.destroy', $ingredient->id)}}" method="post">
+                <form action="{{ route('recette.destroy', $recette->id)}}" method="post">
                   @csrf
                   @method('DELETE')
                   <button class="btn btn-danger" type="submit">Supprimer</button>
@@ -47,6 +47,6 @@
         @endforeach
     </tbody>
   </table>
-  <a href="ingredient/create"><button class="btn btn-primary">Ajouter</button></a>
+  <a href="recette/create"><button class="btn btn-primary">Ajouter</button></a>
 <div>
 @endsection

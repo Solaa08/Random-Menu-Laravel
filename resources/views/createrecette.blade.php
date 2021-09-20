@@ -9,7 +9,7 @@
 
 <div class="card uper">
   <div class="card-header">
-    Ajouter un ingrédient
+    Ajouter une recette
   </div>
 
   <div class="card-body">
@@ -23,24 +23,24 @@
       </div><br />
     @endif
 
-      <form method="post" action="{{ route('ingredient.store') }}">
+      <form method="post" action="{{ route('recette.store') }}">
          @csrf
           <div class="form-group">
-              <label for="type">Type primaire d'ingrédient:</label>
-              <input type="text" class="form-control" name="type_primaire"/>
-          </div>
-
-          <div class="form-group">
-              <label for="type">Type secondaire d'ingrédient:</label>
-              <input type="text" class="form-control" name="type_secondaire"/>
-          </div>
-
-          <div class="form-group">
-              <label for="name">Nom de l'ingrédient:</label>
+              <label for="type">Nom :</label>
               <input type="text" class="form-control" name="name"/>
           </div>
+
+          <div class="form-group">
+              <label for="type">URL :</label>
+              <input type="text" class="form-control" name="url"/>
+          </div>
+
+          <div class="form-group">
+              <label for="name">ID de l'ingrédient:</label>
+              <input type="text" class="form-control" name="ingredient_id"/>
+          </div>
           <button type="submit" class="btn btn-primary">Ajouter</button>
-          <a class="float-right" href="/ingredient">Retour</a>
+          <a class="float-right" href="/recette">Retour</a>
       </form>
   </div>
 </div>

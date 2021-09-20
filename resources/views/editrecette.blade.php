@@ -10,7 +10,7 @@
 
 <div class="card uper">
   <div class="card-header">
-    Modifier l'ingrédient
+    Modifier la recette
   </div>
 
   <div class="card-body">
@@ -25,22 +25,22 @@
       </div><br />
     @endif
 
-      <form method="post" action="{{ route('ingredient.update', $ingredient->id ) }}">
+      <form method="post" action="{{ route('recette.update', $recette->id ) }}">
           <div class="form-group">
               @csrf
               @method('PATCH')
               <label for="name">Nom :</label>
-              <input type="text" class="form-control" name="name" value="{{ $ingredient->nom }}"/>
+              <input type="text" class="form-control" name="name" value="{{ $recette->nom }}"/>
           </div>
 
           <div class="form-group">
-              <label for="cases">Type primaire :</label>
-              <input type="text" class="form-control" name="type_primaire" value="{{ $ingredient->type_primaire }}"/>
+              <label for="cases">URL :</label>
+              <input type="text" class="form-control" name="url" value="{{ $recette->url }}"/>
           </div>
 
           <div class="form-group">
-            <label for="cases">Type secondaire :</label>
-            <input type="text" class="form-control" name="type_secondaire" value="{{ $ingredient->type_secondaire }}"/>
+            <label for="cases">ID de l'ingrédient :</label>
+            <input type="text" class="form-control" name="ingredient" value="{{ $recette->ingredient_id }}"/>
         </div>
           <button type="submit" class="btn btn-primary">Modifier</button>
       </form>

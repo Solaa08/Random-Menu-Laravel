@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TableController;
 use App\Http\Controllers\IngredientController;
+use App\Http\Controllers\RecetteController;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
@@ -28,3 +29,5 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/table', [TableController::class, 'index'])->name('table_index');
 
 Route::resource('ingredient', IngredientController::class);
+
+Route::resource('recette', RecetteController::class);

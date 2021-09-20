@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\IngredientRequest;
+use App\Http\Requests\RecetteRequest;
 use Illuminate\Http\Request;
-use App\Models\Ingredient;
+use App\Models\Recette;
 
-class IngredientController extends Controller
+class RecetteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        $ingredients = Ingredient::all();
+        $recettes = Recette::all();
 
-        return view('indexadmin', compact('ingredients'));
+        return view('indexrecette', compact('recettes'));
     }
 
     /**
@@ -27,25 +27,25 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        return response(view('create'));
+        return response(view('createrecette'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  IngredientRequest  $request
+     * @param  RecetteRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(IngredientRequest $request)
+    public function store(RecetteRequest $request)
     {
-        $ingredient = Ingredient::create([
+        $recette = Recette::create([
             'nom'=>$request['name'],
-            'type_primaire'=>$request['type_primaire'],
-            'type_secondaire'=>$request['type_secondaire'],
+            'url'=>$request['url'],
+            'ingredient'=>$request['ingredient_id'],
             'user_id'=>auth()->user()->getAuthIdentifier()
         ]);
 
-        return redirect('ingredient')->with('success', 'Ingrédient crée avec succès');
+        return redirect('recette')->with('success', 'Recette crée avec succès');
     }
 
     /**
@@ -67,9 +67,9 @@ class IngredientController extends Controller
      */
     public function edit($id)
     {
-        $ingredient = Ingredient::findOrFail($id);
+        $recette = Recette::findOrFail($id);
         
-        return response(view('edit', compact('ingredient')));
+        return response(view('edit', compact('recette')));
     }
 
     /**
@@ -79,15 +79,15 @@ class IngredientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(IngredientRequest $request, $id)
+    public function update(RecetteRequest $request, $id)
     {
-        $ingredient = Ingredient::where('id', $id)->update([
+        $recette = Recette::where('id', $id)->update([
             'nom'=>$request['name'],
-            'type_primaire'=>$request['type_primaire'],
-            'type_secondaire'=>$request['type_secondaire'],
+            'url'=>$request['url'],
+            'ingredient'=>$request['ingredient_id'],
             'user_id'=>auth()->user()->getAuthIdentifier()
         ]);
-        return redirect('/ingredient')->with('success', 'Ingrédient mis à jour avec succès');
+        return redirect('/recette')->with('success', 'Recette mis à jour avec succès');
     }
 
     /**
@@ -98,9 +98,9 @@ class IngredientController extends Controller
      */
     public function destroy($id)
     {
-        $ingredient = Ingredient::findOrFail($id);
-        $ingredient->delete();
+        $recette = Recette::findOrFail($id);
+        $recette->delete();
 
-        return redirect('/ingredient')->with('success', 'Ingrédient supprimé avec succès');
+        return redirect('/recette')->with('success', 'Recette supprimé avec succès');
     }
 }
