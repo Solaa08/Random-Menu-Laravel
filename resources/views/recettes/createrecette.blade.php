@@ -54,10 +54,10 @@
 
               <thead>
               <tr>
-                  <td>Nom</td>
-                  <td>Type primaire</td>
-                  <td>Type secondaire</td>
-                  <td>Action</td>
+                  <th>Nom</th>
+                  <th>Type primaire</th>
+                  <th>Type secondaire</th>
+                  <th>Action</th>
               </tr>
               </thead>
 
