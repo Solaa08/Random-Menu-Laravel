@@ -25,9 +25,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-
 Route::get('/table', [TableController::class, 'index'])->name('table_index');
 
-Route::resource('ingredient', IngredientController::class);
+Route::group(['middleware' => 'auth'], function (){
+    Route::resource('ingredient', IngredientController::class);
+    Route::resource('recette', RecetteController::class);
+});
 
-Route::resource('recette', RecetteController::class);
