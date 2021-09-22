@@ -56,7 +56,6 @@
                 </form>
             </td>
             <td id="table_ingredients_{{$recette->id}}" >
-                <h2>SALUT</h2>
             </td>
         </tr>
         @endforeach
@@ -82,7 +81,7 @@
             })
             .done(function( contenu_html ) {
                 let name = "#table_ingredients_"+id_recette;
-                $(name).html(contenu_html);
+                $(name).html("<h2>SALUT</h2>");
             });
         }
 
