@@ -24,6 +24,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+});
+
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/table', [TableController::class, 'index'])->name('table_index');
 

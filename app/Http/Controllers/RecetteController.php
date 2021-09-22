@@ -100,12 +100,30 @@ class RecetteController extends Controller
      */
     public function update(RecetteRequest $request, $id)
     {
-        $recette = Recette::where('id', $id)->update([
-            'nom'=>$request['name'],
-            'url'=>$request['url'],
-            'ingredient'=>$request['ingredient_id'],
-            'user_id'=>auth()->user()->getAuthIdentifier()
-        ]);
+        if (in_array($request['type'],Recette::$type_recette)){
+            $url = "<a href='".$request['url']."'>".$request['url']."</a>";
+
+            $recette = Recette::where('id', $id)->update([
+                'nom'=>$request['name'],
+                'url'=>$url,
+                'type'=>$request['type'],
+                'user_id'=>auth()->user()->getAuthIdentifier()
+            ]);
+            
+            foreach ($request["ingredient_id"] as $ingre){
+                $data[] = array(
+                    'ingredient_id'=>$ingre,
+                    'recette_id'=>$recette->id
+                );
+            }
+
+            DB::table("recette_contenu")->insertOrIgnore($data);
+
+            return response(redirect('recette')->with('success', 'Recette crée avec succès'));
+        }
+        else{
+            return response(redirect('recette')->with('error', 'Type de recette inconnu.'));
+        }
         return response(redirect('recette')->with('success', 'Recette mis à jour avec succès'));
     }
 
