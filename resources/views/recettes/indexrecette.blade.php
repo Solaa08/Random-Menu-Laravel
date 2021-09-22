@@ -22,22 +22,27 @@
       </div><br />
   @endif
 
-  <table class="table table-striped" id="recette_table">
+      <div id="toto">
+          <button onclick="show_ingredients('1')">CLIQUEZ</button>
+      </div>
+
+  <table class="table table-striped table-bordered dt-responsive nowrap" id="recette_table" style="width: 100em">
 
     <thead>
         <tr>
-            <th>ID</th>
-            <th>Nom</th>
-            <th>url</th>
-            <th>type</th>
-            <th>Action</th>
+            <th scope="col">ID</th>
+            <th scope="col">Nom</th>
+            <th scope="col">URL</th>
+            <th scope="col">Type</th>
+            <th scope="col">Action</th>
+            <th scope="col">Ingrédients contenus dans la recette :</th>
         </tr>
     </thead>
 
     <tbody>
         @foreach($recettes as $recette)
         <tr>
-            <td>{{$recette->id}}</td>
+            <td class="text-center" onclick="show_ingredients('{{$recette->id}}')">{{$recette->id}}</td>
             <td>{{$recette->nom}}</td>
             <td>{!! $recette->url !!}</td>
             <td>{{$recette->type}}</td>
@@ -49,6 +54,9 @@
                     @method('DELETE')
                     <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i>Supp</button>
                 </form>
+            </td>
+            <td id="table_ingredients_{{$recette->id}}" >
+                <h2>SALUT</h2>
             </td>
         </tr>
         @endforeach
@@ -62,19 +70,21 @@
     <script type="application/javascript">
         $(document).ready(function() {
             let recette_table = $('#recette_table').DataTable({
+                responsive: true,
                 language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"}
             });
         });
+
         function show_ingredients(id_recette){
             $.ajax({
                 method: "GET",
-                url: "recette/show",
-                data: { id_recette: id_recette }
+                url: "recette/"+id_recette,
             })
-                .done(function( contenu_html ) {
-                    alert("ok");
-                    recette_table.rows.add;
-                });
+            .done(function( contenu_html ) {
+                let name = "#table_ingredients_"+id_recette;
+                $(name).html(contenu_html);
+            });
         }
+
     </script>
 @endsection

@@ -75,7 +75,18 @@ class RecetteController extends Controller
      */
     public function show($id)
     {
-        return response("ok");
+        $ingredients_id = DB::table("recette_contenu")
+            ->select("ingredient_id")
+            ->where("recette_id",'=',$id)
+            ->pluck("ingredient_id");
+
+        /*$ingredients = DB::table("ingredient")
+            ->select("nom","type_primaire","type_secondaire")
+            ->whereIn("id",$ingredients_id)
+            ->get();
+        */
+        $ingredients = Ingredient::whereIn("id",$ingredients_id)->get();
+        return response(view("recettes.tableau_ingredient")->with("ingredients",$ingredients));
     }
 
     /**
@@ -109,7 +120,7 @@ class RecetteController extends Controller
                 'type'=>$request['type'],
                 'user_id'=>auth()->user()->getAuthIdentifier()
             ]);
-            
+
             foreach ($request["ingredient_id"] as $ingre){
                 $data[] = array(
                     'ingredient_id'=>$ingre,
