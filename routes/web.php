@@ -32,7 +32,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/table', [TableController::class, 'index'])->name('table_index');
 
 Route::group(['middleware' => 'auth'], function (){
-    Route::resource('ingredient', IngredientController::class);
-    Route::resource('recette', RecetteController::class);
+    Route::get("admin",function () {
+       $ingredients = \App\Models\Ingredient::orderByDesc("created_at")->take(30)->get();
+       $recettes = \App\Models\Recette::orderByDesc("created_at")->take(30)->get();
+       return view("admin.dashboard")
+           ->with("ingredients",$ingredients)
+           ->with("recette",$recettes);
+    });
+    Route::resource('admin/ingredient', IngredientController::class);
+    Route::resource('admin/recette', RecetteController::class);
 });
 

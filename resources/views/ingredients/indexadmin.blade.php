@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.layout_admin')
 
 @section('content')
 
@@ -35,7 +35,7 @@
             <td>{{$ingredient->type_primaire}}</td>
             <td>{{$ingredient->type_secondaire}}</td>
             <td><a href="{{ route('ingredient.edit', $ingredient->id)}}" class="btn btn-primary">Modifier</a>
-            
+
                 <form action="{{ route('ingredient.destroy', $ingredient->id)}}" method="post">
                   @csrf
                   @method('DELETE')

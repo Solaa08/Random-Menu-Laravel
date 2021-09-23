@@ -1,33 +1,50 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Tutoriel Laravel 8 CRUD</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.2/r-2.2.9/datatables.min.css"/>
-    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.2/css/dataTables.bootstrap4.min.css"> -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.11.2/r-2.2.9/datatables.min.js"></script>
-    <script src="{{ asset('js/app.js') }}" type="text/js" defer></script>
-</head>
-    <body class="antialiased">
+@extends("layouts.layout_client")
+
+@section("content")
+    <div class="text-center">
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+
+            <header class="masthead mb-auto">
+                <div class="inner">
+                    <h3 class="masthead-brand">Random Menu</h3>
+                    <nav class="nav nav-masthead justify-content-center">
+                        <a class="nav-link active" href="#">Accueil</a>
+                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="#">Contact</a>
+                        @if (Route::has('login'))
+                            @auth
+                                <a href="{{ url('/da') }}" class="nav-link">Administration</a>
+                                <a href="/" class="nav-link">Mon compte</a>
+                            @else
+                                <a href="{{ route('login') }}" class="nav-link">Connexion</a>
+
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="nav-link">Créer un compte</a>
+                                @endif
+                            @endauth
+                        @endif
+                    </nav>
+                </div>
+            </header>
+
+            <div class="inner cover">
+                <h1 class="cover-heading">Le générateur de menus</h1>
+                <p class="lead">"Random Menu" est un site fondé par deux étudiants Ardennais. Il permet de générer aléatoirement des menus sur une période de 7j.</p>
+                <p class="lead">
+                    <a href="#" class="btn btn-lg btn-secondary">Commencer</a>
+                </p>
+            </div>
+
+            <footer class="mastfoot mt-auto">
+
+            </footer>
+        </div>
+
+        <!--
+
         <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
             {{-- <img src="{{ asset('image/logo.jpg') }}" alt="logo" width="100px" height="100px"> --}}
-            @if (Route::has('login'))
-                <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    @auth
-                        <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
             <div>
                 <div class="container-fluid">
                     <div class="row vertical-center">
@@ -36,5 +53,6 @@
                   </div>
             </div>
         </div>
-    </body>
-</html>
+        -->
+    </div>
+@endsection
