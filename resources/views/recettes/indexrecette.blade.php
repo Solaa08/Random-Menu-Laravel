@@ -1,5 +1,7 @@
 @extends('layout')
 
+
+
 @section('content')
 
 <style>
@@ -47,12 +49,12 @@
             <td>{!! $recette->url !!}</td>
             <td>{{$recette->type}}</td>
             <td>
-                <a href="{{ route('recette.edit', $recette->id)}}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i>Modif</a>
-                <button onclick="show_ingredients('{{$recette->id}}')" class="btn btn-secondary"><i class="fa-solid fa-pen-to-square"></i>Voir</button>
+                <a href="{{ route('recette.edit', $recette->id)}}" class="btn btn-primary">Modif</a>
+                <button onclick="show_ingredients('{{$recette->id}}')" class="btn btn-secondary">Voir</button>
                 <form action="{{ route('recette.destroy', $recette->id)}}" method="post">
                     @csrf
                     @method('DELETE')
-                    <button class="btn btn-danger" type="submit"><i class="fa-solid fa-trash"></i>Supp</button>
+                    <button class="btn btn-danger" type="submit">Supp</button>
                 </form>
             </td>
             <td id="table_ingredients_{{$recette->id}}" >

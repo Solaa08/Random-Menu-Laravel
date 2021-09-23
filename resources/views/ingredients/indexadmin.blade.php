@@ -16,17 +16,16 @@
     </div><br />
   @endif
 
-  <table class="table table-striped">
-
-    <thead>
-        <tr>
-            <td>ID</td>
-            <td>Nom</td>
-            <td>Type primaire</td>
-            <td>Type secondaire</td>
-          <td colspan="2">Action</td>
-        </tr>
-    </thead>
+  <table class="table table-striped" id="ingredient_table">
+        <thead>
+          <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Type primaire</th>
+              <th scope="col">Type secondaire</th>
+              <th scope="col">Action</th>
+          </tr>
+      </thead>
 
     <tbody>
         @foreach($ingredients as $ingredient)
@@ -35,8 +34,8 @@
             <td>{{$ingredient->nom}}</td>
             <td>{{$ingredient->type_primaire}}</td>
             <td>{{$ingredient->type_secondaire}}</td>
-            <td><a href="{{ route('ingredient.edit', $ingredient->id)}}" class="btn btn-primary">Modifier</a></td>
-            <td>
+            <td><a href="{{ route('ingredient.edit', $ingredient->id)}}" class="btn btn-primary">Modifier</a>
+            
                 <form action="{{ route('ingredient.destroy', $ingredient->id)}}" method="post">
                   @csrf
                   @method('DELETE')
@@ -49,4 +48,12 @@
   </table>
   <a href="ingredient/create"><button class="btn btn-primary">Ajouter</button></a>
 <div>
+  <script>
+  $(document).ready(function() {
+    let recette_table = $('#ingredient_table').DataTable({
+        responsive: true,
+        language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"}
+    });
+});
+</script>
 @endsection

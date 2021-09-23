@@ -38,6 +38,12 @@
                               <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Ingredients</span>
                           </a>
                       </li>
+                      <br>
+                      <li class="nav-item">
+                        <a href="/table" class="nav-link align-middle px-0">
+                            <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Table</span>
+                        </a>
+                    </li>
               </div>
           </div>
           <div class="col py-3">
