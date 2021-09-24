@@ -28,17 +28,17 @@
                   </a>
                   <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                       <li class="nav-item">
-                          <a href="/dashboard" class="nav-link align-middle px-0">
+                          <a href="dashboard" class="nav-link align-middle px-0">
                               <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">User</span>
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="/recette" class="nav-link align-middle px-0">
+                          <a href="recette" class="nav-link align-middle px-0">
                               <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Recettes</span>
                           </a>
                       </li>
                       <li class="nav-item">
-                          <a href="/ingredient" class="nav-link align-middle px-0">
+                          <a href="ingredient" class="nav-link align-middle px-0">
                               <i class="fs-4 bi-house"></i> <span class="ms-1 d-none d-sm-inline">Ingredients</span>
                           </a>
                       </li>

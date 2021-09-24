@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    @yield("header")
     @yield("content")
     @yield("script")
 </body>

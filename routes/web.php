@@ -25,7 +25,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('admin.dashboard');
+});
+Route::get('/contact', function () {
+    return view('contact');
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

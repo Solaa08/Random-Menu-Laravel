@@ -1,6 +1,7 @@
 @extends("layouts.layout_client")
 
 @section("content")
+    @section("header")
     <div class="text-center">
         <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
 
@@ -9,11 +10,10 @@
                     <h3 class="masthead-brand">Random Menu</h3>
                     <nav class="nav nav-masthead justify-content-center">
                         <a class="nav-link active" href="#">Accueil</a>
-                        <a class="nav-link" href="#">Features</a>
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{{ url('contact') }}">Contact</a>
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ url('/da') }}" class="nav-link">Administration</a>
+                                <a href="{{ url('dashboard') }}" class="nav-link">Administration</a>
                                 <a href="/" class="nav-link">Mon compte</a>
                             @else
                                 <a href="{{ route('login') }}" class="nav-link">Connexion</a>
@@ -26,12 +26,20 @@
                     </nav>
                 </div>
             </header>
+    @endsection
 
             <div class="inner cover">
                 <h1 class="cover-heading">Le générateur de menus</h1>
-                <p class="lead">"Random Menu" est un site fondé par deux étudiants Ardennais. Il permet de générer aléatoirement des menus sur une période de 7j.</p>
+                <p class="lead">"Random Menu" permet de se générer des menus simples tout au long d'une semaine afin de faciliter sa façon de cuisiner.</p>
                 <p class="lead">
-                    <a href="#" class="btn btn-lg btn-secondary">Commencer</a>
+                    @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('table') }}" class="btn btn-lg btn-secondary">Commencer</a>
+                    @else
+                    <a href="{{ url('register') }}" class="btn btn-lg btn-secondary">Commencer</a>
+                    @endauth
+                @endif
+
                 </p>
             </div>
 

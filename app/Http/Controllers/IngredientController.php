@@ -45,7 +45,7 @@ class IngredientController extends Controller
             'user_id'=>auth()->user()->getAuthIdentifier()
         ]);
 
-        return response(redirect('ingredient')->with('success', 'Ingrédient crée avec succès'));
+        return response(redirect('admin/ingredient')->with('success', 'Ingrédient crée avec succès'));
     }
 
     /**
@@ -87,7 +87,7 @@ class IngredientController extends Controller
             'type_secondaire'=>$request['type_secondaire'],
             'user_id'=>auth()->user()->getAuthIdentifier()
         ]);
-        return response(redirect('ingredient')->with('success', 'Ingrédient mis à jour avec succès'));
+        return response(redirect('admin/ingredient')->with('success', 'Ingrédient mis à jour avec succès'));
     }
 
     /**
@@ -101,6 +101,6 @@ class IngredientController extends Controller
         $ingredient = Ingredient::findOrFail($id);
         $ingredient->delete();
 
-        return response(redirect('ingredient')->with('success', 'Ingrédient supprimé avec succès'));
+        return response(redirect('admin/ingredient')->with('success', 'Ingrédient supprimé avec succès'));
     }
 }
