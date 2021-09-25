@@ -44,7 +44,7 @@
     <tbody>
         @foreach($recettes as $recette)
         <tr>
-            <td class="text-center" onclick="show_ingredients('{{$recette->id}}')">{{$recette->id}}</td>
+            <td class="text-center" onclick="show_ingredients('{{$recette->id}}',this)">{{$recette->id}}</td>
             <td>{{$recette->nom}}</td>
             <td>{!! $recette->url !!}</td>
             <td>{{$recette->type}}</td>
@@ -69,23 +69,66 @@
 
 @section('script')
     <script type="application/javascript">
-        $(document).ready(function() {
-            let recette_table = $('#recette_table').DataTable({
-                responsive: true,
-                language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"}
-            });
+        let recette_table = $('#recette_table').DataTable({
+            responsive: {
+                details: true
+            },
+            language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"}
         });
+            //console.log(recette_table.row(0));
+            // Add event listener for opening and closing details
+            /*
+            $('#recette_table tbody').on('click', 'td.text-center', function () {
+                var tr = $(this).closest('tr');
+                var row = recette_table.row( tr );
 
-        function show_ingredients(id_recette){
-            $.ajax({
+                if ( row.child.isShown() ) {
+                    // This row is already open - close it
+                    row.child.hide();
+                    tr.removeClass('shown');
+                }
+                else {
+                    // Open this row
+                    row.child( format(row.data()) ).show();
+                    tr.addClass('shown');
+                }
+            } );
+            */
+
+
+
+        function show_ingredients(id_recette,obj){
+            var tr = $(obj).closest('tr');
+            var row = recette_table.row( tr );
+
+            if ( !row.child.isShown() ) {
+                // Open this row
+                $.ajax({
                 method: "GET",
                 url: "recette/"+id_recette,
-            })
-            .done(function( contenu_html ) {
-                let name = "#table_ingredients_"+id_recette;
-                $(name).html("<h2>SALUT</h2>");
-            });
+                })
+                .done(function( contenu_html ) {
+                    row.child( contenu_html ).show();
+                    tr.addClass('shown');
+                });
+            }
+            /*
+            else {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }*/
         }
 
+        function delete_ingredient(id_ingredient,id_recette) {
+            $.ajax({
+                method: "POST",
+                url: "recette/toto/",
+                data: {id_ingredient,id_recette}
+            })
+            .done(function( contenu_html ) {
+                alert(contenu_html);
+            });
+        }
     </script>
 @endsection

@@ -86,7 +86,7 @@ class RecetteController extends Controller
             ->get();
         */
         $ingredients = Ingredient::whereIn("id",$ingredients_id)->get();
-        return response(view("recettes.tableau_ingredient")->with("ingredients",$ingredients));
+        return response(view("recettes.tableau_ingredient")->with("ingredients",$ingredients)->with("recette_id",$id));
     }
 
     /**
@@ -150,5 +150,18 @@ class RecetteController extends Controller
         $recette->delete();
 
         return response(redirect('recette')->with('success', 'Recette supprimé avec succès'));
+    }
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function ingredient_destroy(Request $request){
+        DB::table("recette_contenu")->where([
+            ["recette_id","=",$request['recette_id']],
+            ["ingredient_id","=",$request['ingredient_id']],
+        ])->delete();
+        return response("ok");
+        return response(redirect('recette')->with('success', 'Ingrédient de la recette supprimé avec succès'));
     }
 }
