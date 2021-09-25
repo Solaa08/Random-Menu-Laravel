@@ -24,10 +24,6 @@
       </div><br />
   @endif
 
-      <div id="toto">
-          <button onclick="show_ingredients('1')">CLIQUEZ</button>
-      </div>
-
   <table class="table table-striped table-bordered dt-responsive nowrap" id="recette_table" style="width: 100em">
 
     <thead>
@@ -37,7 +33,7 @@
             <th scope="col">URL</th>
             <th scope="col">Type</th>
             <th scope="col">Action</th>
-            <th scope="col">Ingrédients contenus dans la recette :</th>
+            <th scope="col">ㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤㅤ</th>
         </tr>
     </thead>
 
@@ -75,27 +71,6 @@
             },
             language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"}
         });
-            //console.log(recette_table.row(0));
-            // Add event listener for opening and closing details
-            /*
-            $('#recette_table tbody').on('click', 'td.text-center', function () {
-                var tr = $(this).closest('tr');
-                var row = recette_table.row( tr );
-
-                if ( row.child.isShown() ) {
-                    // This row is already open - close it
-                    row.child.hide();
-                    tr.removeClass('shown');
-                }
-                else {
-                    // Open this row
-                    row.child( format(row.data()) ).show();
-                    tr.addClass('shown');
-                }
-            } );
-            */
-
-
 
         function show_ingredients(id_recette,obj){
             var tr = $(obj).closest('tr');
@@ -120,14 +95,15 @@
             }*/
         }
 
-        function delete_ingredient(id_ingredient,id_recette) {
+        function delete_ingredient(id_ingredient,id_recette,obj) {
+            var tr = $(obj).closest('tr');
             $.ajax({
                 method: "POST",
-                url: "recette/toto/",
-                data: {id_ingredient,id_recette}
+                url: "recette/ingredient_destroy",
+                data: {"_token": "{{ csrf_token() }}",ingredient_id: id_ingredient,recette_id: id_recette}
             })
             .done(function( contenu_html ) {
-                alert(contenu_html);
+                tr.remove();
             });
         }
     </script>

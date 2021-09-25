@@ -43,7 +43,7 @@ Route::group(['middleware' => 'auth'], function (){
            ->with("recette",$recettes);
     });
     Route::resource('admin/ingredient', IngredientController::class);
-    Route::post('admin/toto/ingredient_destroy', [RecetteController::class, 'ingredient_destroy']);
+    Route::post('admin/recette/ingredient_destroy', [RecetteController::class, 'ingredient_destroy']);
     Route::resource('admin/recette', RecetteController::class);
 });
 

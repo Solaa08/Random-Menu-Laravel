@@ -13,7 +13,7 @@
             <td>{{$ingredient->nom}}</td>
             <td>{{$ingredient->type_primaire}}</td>
             <td>{{$ingredient->type_secondaire}}</td>
-            <td><button class="btn btn-danger" onclick="delete_ingredient('{{$ingredient->id}}','{{$recette_id}}')">Supprimer</button></td>
+            <td><button class="btn btn-danger" onclick="delete_ingredient('{{$ingredient->id}}','{{$recette_id}}',this)">Supprimer</button></td>
         </tr>
     @endforeach
     </tbody>

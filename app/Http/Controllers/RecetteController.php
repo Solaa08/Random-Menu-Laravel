@@ -151,9 +151,10 @@ class RecetteController extends Controller
 
         return response(redirect('recette')->with('success', 'Recette supprimé avec succès'));
     }
+
     /**
      * Remove the specified resource from storage.
-     *
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
     public function ingredient_destroy(Request $request){
@@ -161,7 +162,7 @@ class RecetteController extends Controller
             ["recette_id","=",$request['recette_id']],
             ["ingredient_id","=",$request['ingredient_id']],
         ])->delete();
-        return response("ok");
-        return response(redirect('recette')->with('success', 'Ingrédient de la recette supprimé avec succès'));
+
+        return response('Ingrédient de la recette supprimé avec succès');
     }
 }
