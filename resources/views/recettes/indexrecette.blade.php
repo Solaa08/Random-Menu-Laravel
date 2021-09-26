@@ -46,7 +46,6 @@
             <td>{{$recette->type}}</td>
             <td>
                 <a href="{{ route('recette.edit', $recette->id)}}" class="btn btn-primary">Modif</a>
-                <button onclick="show_ingredients('{{$recette->id}}')" class="btn btn-secondary">Voir</button>
                 <form action="{{ route('recette.destroy', $recette->id)}}" method="post">
                     @csrf
                     @method('DELETE')

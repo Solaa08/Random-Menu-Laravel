@@ -98,8 +98,8 @@ class RecetteController extends Controller
     public function edit($id)
     {
         $recette = Recette::findOrFail($id);
-
-        return response(view('recettes.edit', compact('recette')));
+        $ingredients = Ingredient::all("id","nom","type_primaire","type_secondaire");
+        return response(view('recettes.editrecette')->with("types",Recette::$type_recette)->with("ingredients",$ingredients));
     }
 
     /**
@@ -130,7 +130,7 @@ class RecetteController extends Controller
 
             DB::table("recette_contenu")->insertOrIgnore($data);
 
-            return response(redirect('recette')->with('success', 'Recette crée avec succès'));
+            return response(redirect('recette')->with('success', 'Recette modifiée avec succès'));
         }
         else{
             return response(redirect('recette')->with('error', 'Type de recette inconnu.'));
