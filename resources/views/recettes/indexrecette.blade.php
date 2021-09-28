@@ -42,7 +42,7 @@
         <tr>
             <td class="text-center" onclick="show_ingredients('{{$recette->id}}',this)">{{$recette->id}}</td>
             <td>{{$recette->nom}}</td>
-            <td>{!! $recette->url !!}</td>
+            <td><a href="{!! $recette->url !!}">{!! $recette->url !!}</a></td>
             <td>{{$recette->type}}</td>
             <td>
                 <a href="{{ route('recette.edit', $recette->id)}}" class="btn btn-primary">Modif</a>

@@ -42,11 +42,9 @@ class RecetteController extends Controller
     public function store(RecetteRequest $request)
     {
         if (in_array($request['type'],Recette::$type_recette)){
-            $url = "<a href='".$request['url']."'>".$request['url']."</a>";
-
             $recette = Recette::create([
                 'nom'=>$request['name'],
-                'url'=>$url,
+                'url'=>$request['url'],
                 'type'=>$request['type'],
                 'user_id'=>auth()->user()->getAuthIdentifier()
             ]);
@@ -60,10 +58,10 @@ class RecetteController extends Controller
 
             DB::table("recette_contenu")->insertOrIgnore($data);
 
-            return response(redirect('recette')->with('success', 'Recette crée avec succès'));
+            return response(redirect('admin/recette')->with('success', 'Recette crée avec succès'));
         }
         else{
-            return response(redirect('recette')->with('error', 'Type de recette inconnu.'));
+            return response(redirect('admin/recette')->with('error', 'Type de recette inconnu.'));
         }
     }
 
@@ -98,8 +96,15 @@ class RecetteController extends Controller
     public function edit($id)
     {
         $recette = Recette::findOrFail($id);
+        $recette_contenu = DB::table('recette_contenu')
+            ->where('recette_id','=',$id)
+            ->pluck('ingredient_id','ingredient_id');
         $ingredients = Ingredient::all("id","nom","type_primaire","type_secondaire");
-        return response(view('recettes.editrecette')->with("types",Recette::$type_recette)->with("ingredients",$ingredients));
+        return response(view('recettes.editrecette')
+            ->with("types",Recette::$type_recette)
+            ->with("ingredients",$ingredients)
+            ->with("recette",$recette)
+            ->with("recette_contenu",$recette_contenu));
     }
 
     /**
@@ -112,30 +117,35 @@ class RecetteController extends Controller
     public function update(RecetteRequest $request, $id)
     {
         if (in_array($request['type'],Recette::$type_recette)){
-            $url = "<a href='".$request['url']."'>".$request['url']."</a>";
-
-            $recette = Recette::where('id', $id)->update([
+            $data = array();
+            $ingredients_checked = json_decode($request['ingredient_id'],true);
+            Recette::where('id', $id)->update([
                 'nom'=>$request['name'],
-                'url'=>$url,
+                'url'=>$request['url'],
                 'type'=>$request['type'],
                 'user_id'=>auth()->user()->getAuthIdentifier()
             ]);
-
-            foreach ($request["ingredient_id"] as $ingre){
-                $data[] = array(
-                    'ingredient_id'=>$ingre,
-                    'recette_id'=>$recette->id
-                );
+            if (!empty($ingredients_checked)){
+                foreach ($ingredients_checked as $ingre){
+                    $data[] = array(
+                        'ingredient_id'=>intval($ingre),
+                        'recette_id'=>intval($id)
+                    );
+                }
             }
+            DB::table("recette_contenu")
+                ->where("recette_id",'=',$id)
+                ->delete();
 
-            DB::table("recette_contenu")->insertOrIgnore($data);
-
-            return response(redirect('recette')->with('success', 'Recette modifiée avec succès'));
+            if (!empty($data)){
+                DB::table("recette_contenu")
+                    ->insert($data);
+            }
+            return response(redirect('admin/recette')->with('success', 'Recette modifiée avec succès'));
         }
         else{
-            return response(redirect('recette')->with('error', 'Type de recette inconnu.'));
+            return response(redirect('admin/recette')->with('error', 'Recette non mise à jour.'));
         }
-        return response(redirect('recette')->with('success', 'Recette mis à jour avec succès'));
     }
 
     /**
@@ -149,7 +159,7 @@ class RecetteController extends Controller
         $recette = Recette::findOrFail($id);
         $recette->delete();
 
-        return response(redirect('recette')->with('success', 'Recette supprimé avec succès'));
+        return response(redirect('admin/recette')->with('success', 'Recette supprimé avec succès'));
     }
 
     /**

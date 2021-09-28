@@ -76,8 +76,9 @@
       </div><br />
     @endif
 
-         <form method="post" action="{{ route('recette.update', $recette->id ) }}">
-          <div class="form-group">
+         <form method="post" action="{{ route('recette.update', $recette->id ) }}" id="recette_update">
+         <input type="hidden" name="ingredient_id" id="ingredient_id">
+         <div class="form-group">
               @csrf
               @method('PATCH')
               <label for="name">Nom :</label>
@@ -86,15 +87,19 @@
 
           <div class="form-group">
               <label for="cases">URL :</label>
-              <input type="text" class="form-control" name="url" value="{{ $recette->url }}"/>
+              <input type="text" class="form-control" name="url" value="{!! $recette->url !!}"/>
           </div>
 
           <div class="form-group">
               <label for="type">Type</label>
-              <select class="form-control" id="type" name="type" value="{{ $recette->type }}">
-                  <option selected value="">Selectionnez un type</option>
+              <select class="form-control" id="type" name="type">
+                  <option value="">Selectionnez un type</option>
                   @foreach($types as $type)
-                      <option value="{{$type}}">{{$type}}</option>
+                      @if($recette->type === $type)
+                          <option selected value="{{$type}}">{{$type}}</option>
+                      @else
+                          <option value="{{$type}}">{{$type}}</option>
+                      @endif
                   @endforeach
               </select>
           </div>
@@ -104,7 +109,7 @@
               <input type="text" class="form-control" id="ingredient_id" name="ingredient_id"/>
           </div>
 -->
-          <table class="table table-striped" id="ingredient_select">
+          <table class="table table-striped dt-responsive" id="ingredient_select">
 
               <thead>
               <tr>
@@ -121,7 +126,11 @@
                       <td>{{$ingredient->nom}}</td>
                       <td>{{$ingredient->type_primaire}}</td>
                       <td>{{$ingredient->type_secondaire}}</td>
-                      <td><input type="checkbox" name="ingredient_id[]" value="{{$ingredient->id}}"></td>
+                      @if(isset($recette_contenu[$ingredient->id]))
+                        <td><input checked type="checkbox" name="ingredient_check[]" value="{{$ingredient->id}}"></td>
+                      @else
+                        <td><input type="checkbox" name="ingredient_check[]" value="{{$ingredient->id}}"></td>
+                      @endif
                   </tr>
               @endforeach
               </tbody>
@@ -137,9 +146,34 @@
 @section('script')
 <script type="application/javascript">
     $(document).ready(function() {
-        $('#ingredient_select').DataTable({
-            language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"}
+        let table = $('#ingredient_select').DataTable({
+            responsive: {
+                details: true
+            },
+            language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"},
         });
+
+        let checkedVals = $('input[name="ingredient_check[]"]:checkbox:checked').map(function() {
+            return this.value;
+        }).get();
+        console.log(checkedVals);
+        $('#recette_update').submit(function(event) {
+            //checkboxes should have a general class to traverse
+            let rowcollection = table.$("input:checked", {"page": "all"});
+
+            //Now loop through all the selected checkboxes to perform desired actions
+            let checkedVals = [];
+            rowcollection.each(function(index,elem){
+                //You have access to the current iterating row
+                checkedVals.push($(elem).val());
+                //Do something with 'checkbox_value'
+            });
+
+            let checkedVals_json = JSON.stringify(checkedVals);
+            console.log(checkedVals);
+            $('#ingredient_id').val(checkedVals_json);
+        });
+
     });
 </script>
 
