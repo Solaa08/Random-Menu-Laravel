@@ -12,7 +12,7 @@ class TableController extends Controller
     {
         $days = $this->get_days();
         $recettes = $this->random_table(7);
-        var_dump($recettes["plats"]);
+        var_dump($recettes["entrees"]);
         return view('table')->with('days',$days)->with('recettes',$recettes);
     }
 
