@@ -25,7 +25,7 @@ class RecetteSeeder extends Seeder
         $data_recette = array();
         $data_recette_contenu = array();
 
-        for ($i = 0; $i < 50; $i++){
+        for ($i = 0; $i < 100; $i++){
             $data_recette[] = array(
                 "nom"=>$faker->sentence,
                 "url"=>$faker->url,
