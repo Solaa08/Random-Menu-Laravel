@@ -18,23 +18,24 @@
         </tr>
       </thead>
       <tbody>
-        <?php for ($j = 1; $j <= 2; $j++) { ?>
+        @for ($j = 1; $j <= 2; $j++) 
         <tr>
-            <th colspan="7"></th>
+        @for ($i = 1; $i <= 7; $i++) 
+        
+          <td>
+          <h3>entree</h3>
+          <?php echo $entre[$i]->nom?>
+          <hr>
+          <h3>plat</h3>
+          <?php echo $plat[$i]->nom?>
+          <hr>
+          <h3>dessert</h3>
+          <?php echo $dessert[$i]->nom?>  
+          </td>
+        
+        @endfor 
         </tr>
-        <?php for ($i = 1; $i <= 7; $i++) { ?>
-        <tr>
-          <td><?php echo $entre[$i]->nom?></td>
-        </tr>
-        <tr>
-          <td><?php echo $plat[$i]->nom?></td>
-        </tr>
-        <tr>
-          <td><?php echo $dessert[$i]->nom?></td>
-        </tr>
-        <?php } ?>
-        <tr>
-          <?php } ?>
+        @endfor 
             {{-- <th colspan="7">Soir</th>
         </tr>
         <tr>
