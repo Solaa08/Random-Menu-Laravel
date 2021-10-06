@@ -30,19 +30,19 @@ class TableController extends Controller
         if ($this->nb_jours > 0){
             $entrees =  DB::table("recette")
                 ->where("type","=","Entrée")
-                ->inRandomOrder("id")
+                ->inRandomOrder()
                 ->limit($this->nb_jours*2+1)
                 ->get();
 
             $plats = DB::table("recette")
                 ->where("type","=","Plat")
-                ->inRandomOrder("id")
+                ->inRandomOrder()
                 ->limit($this->nb_jours*2+1)
                 ->get();
 
             $desserts = DB::table("recette")
                 ->where("type","=","Dessert")
-                ->inRandomOrder("id")
+                ->inRandomOrder()
                 ->limit($this->nb_jours*2+1)
                 ->get();
 
@@ -66,5 +66,34 @@ class TableController extends Controller
             $days[] =  $mytime->translatedFormat("l");
         }
         return $days;
+    }
+
+    public function refresh_menu(Request $request){
+        /*
+        $recette = DB::table('recette')
+            ->select('id','nom','url')
+            ->where('type','=',$request['type'])
+            ->whereNotIn('id',$request['autre_id'])
+            ->inRandomOrder()
+            ->limit(1)
+            ->get();
+        */
+
+        $recette = DB::table('recette')
+            ->select('id','nom','url')
+            ->where('type','=',$request['type'])
+            ->inRandomOrder()
+            ->limit(1)
+            ->get();
+
+        $html =
+            "
+            <div id='refresh_menu_div_".$recette[0]->id."'>
+                <button class='btn btn-dark float-right' id='refresh_menu_btn_".$recette[0]->id."' onclick='refresh_menu("."\"".$recette[0]->id."\","."\"".$request['type']."\")'>+</button>
+                <h3>".$request['type']."</h3>
+                ".$recette[0]->nom."
+            </div>
+            ";
+        return $html;
     }
 }

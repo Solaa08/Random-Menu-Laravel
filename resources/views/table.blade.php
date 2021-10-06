@@ -36,21 +36,35 @@
                     {{$repas[$j-1]}}
                 </td>
             </tr>
-        <tr>
+            <tr>
             @for ($i = 1; $i <= $nb_max_jours; $i++)
                 <td>
-                    <h3>entree</h3>
-                    {{ $entre[$i*$j]->nom}}
-                    <hr>
-                    <h3>plat</h3>
-                    {{ $plat[$i*$j]->nom }}
-                    <hr>
-                    <h3>dessert</h3>
-                    {{ $dessert[$i*$j]->nom }}
+                    <div>
+
+                    </div>
+                    <div>
+                        <div id="refresh_menu_div_{{$entre[$i*$j]->id}}">
+                            <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" onclick="refresh_menu('{{$entre[$i*$j]->id}}','Entrée')">+</button>
+                            <h3>entree</h3>
+                            {{ $entre[$i*$j]->nom}}
+                        </div>
+                        <hr>
+                        <div id="refresh_menu_div_{{$plat[$i*$j]->id}}">
+                            <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$plat[$i*$j]->id}}" onclick="refresh_menu('{{$plat[$i*$j]->id}}','Plat')">+</button>
+                            <h3>plat</h3>
+                            {{ $plat[$i*$j]->nom }}
+                        </div>
+                        <hr>
+                        <div id="refresh_menu_div_{{$dessert[$i*$j]->id}}">
+                            <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$dessert[$i*$j]->id}}" onclick="refresh_menu('{{$dessert[$i*$j]->id}}','Dessert')">+</button>
+                            <h3>dessert</h3>
+                            {{ $dessert[$i*$j]->nom }}
+                        </div>
+                    </div>
                 </td>
+            @endfor
+            </tr>
         @endfor
-         </tr>
-  @endfor
       {{-- <th colspan="7">Soir</th>
   </tr>
   <tr>
@@ -81,5 +95,21 @@
       <td>Dessert</td> --}}
       </tbody>
     </table>
-    </div>
-    @endsection
+</div>
+
+<script type="application/javascript">
+    function refresh_menu(id,type){
+
+        $.ajax({
+            method: "GET",
+            url: "table/refresh_menu",
+            data: {type:type}
+        })
+        .done(function( contenu_html ) {
+            if (contenu_html !== ""){
+                $("#refresh_menu_div_"+id).html(contenu_html);
+            }
+        });
+    }
+</script>
+@endsection

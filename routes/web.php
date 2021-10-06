@@ -33,6 +33,8 @@ Route::get('/contact', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/table', [TableController::class, 'index'])->name('table_index');
+Route::get('/table/refresh_menu', [TableController::class, 'refresh_menu']);
+
 
 Route::group(['middleware' => 'auth'], function (){
     Route::get("admin",function () {
