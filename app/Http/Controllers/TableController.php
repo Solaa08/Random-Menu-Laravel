@@ -87,9 +87,10 @@ class TableController extends Controller
             ->get();
 
         $html =
+        // <div id='refresh_menu_div_".$recette[0]->id."'>
             "
-            <div id='refresh_menu_div_".$recette[0]->id."'>
-                <button class='btn btn-dark float-right' id='refresh_menu_btn_".$recette[0]->id."' onclick='refresh_menu("."\"".$recette[0]->id."\","."\"".$request['type']."\")'>+</button>
+            <div>
+            <button class='btn-refresh btn btn-dark float-right' data-type='".$request['type']."'>+</button>
                 <h3>".$request['type']."</h3>
                 ".$recette[0]->nom."
             </div>

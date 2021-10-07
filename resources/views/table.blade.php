@@ -31,7 +31,7 @@
       </thead>
       <tbody>
         @for ($j = 1; $j <= 2; $j++)
-            <tr class="text-center bg-dark">
+            <tr class="text-center">
                 <td colspan="{{$nb_max_jours}}">
                     {{$repas[$j-1]}}
                 </td>
@@ -43,21 +43,22 @@
 
                     </div>
                     <div>
-                        <div id="refresh_menu_div_{{$entre[$i*$j]->id}}">
-                            <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" onclick="refresh_menu('{{$entre[$i*$j]->id}}','Entrée')">+</button>
-                            <h3>entree</h3>
+                        <div id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_entree">
+                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" data-type="Entrée">+</button>
+                            {{-- <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" onclick="refresh_menu('{{$entre[$i*$j]->id}}','Entrée')">+</button> --}}
+                            <h3>Entrée</h3>
                             {{ $entre[$i*$j]->nom}}
                         </div>
                         <hr>
-                        <div id="refresh_menu_div_{{$plat[$i*$j]->id}}">
-                            <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$plat[$i*$j]->id}}" onclick="refresh_menu('{{$plat[$i*$j]->id}}','Plat')">+</button>
-                            <h3>plat</h3>
+                        <div id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_plat">
+                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$plat[$i*$j]->id}}" data-type="Plat">+</button>
+                            <h3>Plat</h3>
                             {{ $plat[$i*$j]->nom }}
                         </div>
                         <hr>
-                        <div id="refresh_menu_div_{{$dessert[$i*$j]->id}}">
-                            <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$dessert[$i*$j]->id}}" onclick="refresh_menu('{{$dessert[$i*$j]->id}}','Dessert')">+</button>
-                            <h3>dessert</h3>
+                        <div id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_dessert">
+                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$dessert[$i*$j]->id}}" data-type="Dessert">+</button>
+                            <h3>Dessert</h3>
                             {{ $dessert[$i*$j]->nom }}
                         </div>
                     </div>
@@ -65,51 +66,32 @@
             @endfor
             </tr>
         @endfor
-      {{-- <th colspan="7">Soir</th>
-  </tr>
-  <tr>
-      <td>Entrée</td>
-      <td>Entrée</td>
-      <td>Entrée</td>
-      <td>Entrée</td>
-      <td>Entrée</td>
-      <td>Entrée</td>
-      <td>Entrée</td>
-    </tr>
-    <tr>
-      <td>Plat</td>
-      <td>Plat</td>
-      <td>Plat</td>
-      <td>Plat</td>
-      <td>Plat</td>
-      <td>Plat</td>
-      <td>Plat</td>
-    </tr>
-    <tr>
-      <td>Dessert</td>
-      <td>Dessert</td>
-      <td>Dessert</td>
-      <td>Dessert</td>
-      <td>Dessert</td>
-      <td>Dessert</td>
-      <td>Dessert</td> --}}
       </tbody>
     </table>
 </div>
 
 <script type="application/javascript">
-    function refresh_menu(id,type){
 
+  $(".container table").on(
+    'click',
+    'button.btn-refresh',
+    function(e){
+        var type = $(e.currentTarget).data('type');
+        console.log(type);
         $.ajax({
             method: "GET",
             url: "table/refresh_menu",
             data: {type:type}
         })
-        .done(function( contenu_html ) {
+        .done(( contenu_html ) => {
+            console.log($(e.currentTarget).parent());
+            console.log($(e.currentTarget).parent());
             if (contenu_html !== ""){
-                $("#refresh_menu_div_"+id).html(contenu_html);
+                $(e.currentTarget).parent().html(contenu_html);
             }
         });
     }
+  )
+
 </script>
 @endsection
