@@ -89,8 +89,8 @@ class TableController extends Controller
         $html =
         // <div id='refresh_menu_div_".$recette[0]->id."'>
             "
-            <div>
-            <button class='btn-refresh btn btn-dark float-right' data-type='".$request['type']."'>+</button>
+            <div class='d-flex flex-column'>
+            <button class='btn-refresh btn btn-dark float-right' data-type='".$request['type']."'style='width: 2.5rem; height: 2.5rem;'>⟳</button>
                 <h3>".$request['type']."</h3>
                 ".$recette[0]->nom."
             </div>

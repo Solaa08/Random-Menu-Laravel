@@ -43,21 +43,21 @@
 
                     </div>
                     <div>
-                        <div id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_entree">
-                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" data-type="Entrée">+</button>
+                        <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_entree">
+                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" data-type="Entrée" style="width: 2.5rem; height: 2.5rem;">⟳</button>
                             {{-- <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" onclick="refresh_menu('{{$entre[$i*$j]->id}}','Entrée')">+</button> --}}
                             <h3>Entrée</h3>
                             {{ $entre[$i*$j]->nom}}
                         </div>
                         <hr>
-                        <div id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_plat">
-                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$plat[$i*$j]->id}}" data-type="Plat">+</button>
+                        <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_plat">
+                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$plat[$i*$j]->id}}" data-type="Plat" style="width: 2.5rem; height: 2.5rem;">⟳</button>
                             <h3>Plat</h3>
                             {{ $plat[$i*$j]->nom }}
                         </div>
                         <hr>
-                        <div id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_dessert">
-                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$dessert[$i*$j]->id}}" data-type="Dessert">+</button>
+                        <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_dessert">
+                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$dessert[$i*$j]->id}}" data-type="Dessert" style="width: 2.5rem; height: 2.5rem;">⟳</button>
                             <h3>Dessert</h3>
                             {{ $dessert[$i*$j]->nom }}
                         </div>

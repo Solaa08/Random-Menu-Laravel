@@ -26,7 +26,7 @@ class IngredientSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++){
             $data[] = array(
-                "nom"=>$faker->foodName(),
+                "nom"=>$faker->vegetableName(),
                 "type_primaire"=>$faker->randomElement($type_primaire),
                 "type_secondaire"=>$faker->randomElement($type_secondaire),
                 "user_id"=>1,

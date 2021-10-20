@@ -27,7 +27,7 @@ class RecetteSeeder extends Seeder
 
         for ($i = 0; $i < 100; $i++){
             $data_recette[] = array(
-                "nom"=>$faker->sentence,
+                "nom"=>$faker->foodName(),
                 "url"=>$faker->url,
                 "type"=>$faker->randomElement(Recette::$type_recette),
                 "user_id"=>1,

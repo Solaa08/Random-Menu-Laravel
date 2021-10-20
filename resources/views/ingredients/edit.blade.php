@@ -43,6 +43,7 @@
             <input type="text" class="form-control" name="type_secondaire" value="{{ $ingredient->type_secondaire }}"/>
         </div>
           <button type="submit" class="btn btn-primary">Modifier</button>
+          <a class="float-right" href="{{ url('admin/ingredient') }}">Retour</a>
       </form>
   </div>
 </div>

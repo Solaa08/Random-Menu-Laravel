@@ -13,8 +13,8 @@
                         <a class="nav-link" href="{{ url('contact') }}">Contact</a>
                         @if (Route::has('login'))
                             @auth
-                                <a href="{{ url('dashboard') }}" class="nav-link">Administration</a>
-                                <a href="/" class="nav-link">Mon compte</a>
+                                <a href="{{ url('admin/recette') }}" class="nav-link">Administration</a>
+                                {{-- <a href="{{ route('logout') }}" class="nav-link">Déconnexion</a> --}}
                             @else
                                 <a href="{{ route('login') }}" class="nav-link">Connexion</a>
 
@@ -36,7 +36,7 @@
                     @auth
                         <a href="{{ url('table') }}" class="btn btn-lg btn-secondary">Commencer</a>
                     @else
-                    <a href="{{ url('register') }}" class="btn btn-lg btn-secondary">Commencer</a>
+                    <a href="{{ url('login') }}" class="btn btn-lg btn-secondary">Commencer</a>
                     @endauth
                 @endif
 
