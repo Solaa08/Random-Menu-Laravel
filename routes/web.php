@@ -34,6 +34,7 @@ Route::get('/contact', function () {
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/table', [TableController::class, 'index'])->name('table_index');
 Route::get('/table/refresh_menu', [TableController::class, 'refresh_menu']);
+Route::get('/table/recette/{id}', [RecetteController::class, 'show']);
 
 
 Route::group(['middleware' => 'auth'], function (){

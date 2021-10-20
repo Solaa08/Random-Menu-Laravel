@@ -44,22 +44,58 @@
                     </div>
                     <div>
                         <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_entree">
-                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" data-type="Entrée" style="width: 2.5rem; height: 2.5rem;">⟳</button>
+                            <button
+                                class="btn-refresh btn btn-dark float-right"
+                                id="refresh_menu_btn_{{$entre[$i*$j]->id}}"
+                                data-type="Entrée"
+                                style="width: 2.5rem; height: 2.5rem;">⟳
+                            </button>
+                            <button
+                                class="btn-show btn btn-dark float-right"
+                                id="show_btn_{{$entre[$i*$j]->id}}"
+                                onclick="showRecette('{{$entre[$i*$j]->id}}')"
+                                data-type="Entrée" style="width: 2.5rem; height: 2.5rem;">👁
+                            </button>
                             {{-- <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" onclick="refresh_menu('{{$entre[$i*$j]->id}}','Entrée')">+</button> --}}
                             <h3>Entrée</h3>
-                            {{ $entre[$i*$j]->nom}}
+                            <p id="recette_title_{{$entre[$i*$j]->id}}">{{ $entre[$i*$j]->nom}}</p>
                         </div>
                         <hr>
                         <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_plat">
-                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$plat[$i*$j]->id}}" data-type="Plat" style="width: 2.5rem; height: 2.5rem;">⟳</button>
+                            <button
+                                class="btn-refresh btn btn-dark float-right"
+                                id="refresh_menu_btn_{{$plat[$i*$j]->id}}"
+                                data-type="Plat"
+                                style="width: 2.5rem; height: 2.5rem;">⟳
+                            </button>
+                            <button
+                                class="btn-show btn btn-dark float-right"
+                                id="show_btn_{{$entre[$i*$j]->id}}"
+                                onclick="showRecette('{{$plat[$i*$j]->id}}')"
+                                data-type="Entrée"
+                                style="width: 2.5rem; height: 2.5rem;">👁
+                            </button>
+
                             <h3>Plat</h3>
-                            {{ $plat[$i*$j]->nom }}
+                            <p id="recette_title_{{$plat[$i*$j]->id}}">{{ $plat[$i*$j]->nom }}</p>
                         </div>
                         <hr>
                         <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_dessert">
-                            <button class="btn-refresh btn btn-dark float-right" id="refresh_menu_btn_{{$dessert[$i*$j]->id}}" data-type="Dessert" style="width: 2.5rem; height: 2.5rem;">⟳</button>
+                            <button
+                                class="btn-refresh btn btn-dark float-right"
+                                id="refresh_menu_btn_{{$dessert[$i*$j]->id}}"
+                                data-type="Dessert"
+                                style="width: 2.5rem; height: 2.5rem;">⟳
+                            </button>
+                            <button
+                                class="btn-show btn btn-dark float-right"
+                                id="show_btn_{{$entre[$i*$j]->id}}"
+                                onclick="showRecette('{{$dessert[$i*$j]->id}}')"
+                                data-type="Entrée"
+                                style="width: 2.5rem; height: 2.5rem;">👁
+                            </button>
                             <h3>Dessert</h3>
-                            {{ $dessert[$i*$j]->nom }}
+                            <p id="recette_title_{{$dessert[$i*$j]->id}}">{{ $dessert[$i*$j]->nom }}</p>
                         </div>
                     </div>
                 </td>
@@ -68,30 +104,67 @@
         @endfor
       </tbody>
     </table>
+
+    <div class="container" id="result">
+
+    </div>
+</div>
+
+<!-- Large modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
+
+<div id="modal_contenu_recette" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="application/javascript">
-
   $(".container table").on(
     'click',
     'button.btn-refresh',
     function(e){
         var type = $(e.currentTarget).data('type');
-        console.log(type);
         $.ajax({
             method: "GET",
             url: "table/refresh_menu",
             data: {type:type}
         })
         .done(( contenu_html ) => {
-            console.log($(e.currentTarget).parent());
-            console.log($(e.currentTarget).parent());
             if (contenu_html !== ""){
                 $(e.currentTarget).parent().html(contenu_html);
             }
         });
     }
   )
+
+  function showRecette(id_recette){
+      let recette_title = $("#recette_title_"+id_recette).text();
+      $.ajax({
+          method: "GET",
+          url: "table/recette/"+id_recette,
+      })
+      .done(( contenu_html ) => {
+          if (contenu_html !== ""){
+              $('#modal_contenu_recette').modal('toggle')
+              $(".modal-title").html('Ingrédients de la recette : '+recette_title);
+              $(".modal-body").html(contenu_html);
+          }
+      });
+  }
 
 </script>
 @endsection
