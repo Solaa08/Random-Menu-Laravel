@@ -37,16 +37,21 @@ Route::get('/table/refresh_menu', [TableController::class, 'refresh_menu']);
 Route::get('/table/recette/{id}', [RecetteController::class, 'show']);
 
 
-Route::group(['middleware' => 'auth'], function (){
+Route::group(['middleware' => ['role:admin']], function () {
     Route::get("admin",function () {
-       $ingredients = \App\Models\Ingredient::orderByDesc("created_at")->take(30)->get();
-       $recettes = \App\Models\Recette::orderByDesc("created_at")->take(30)->get();
-       return view("admin.dashboard")
-           ->with("ingredients",$ingredients)
-           ->with("recette",$recettes);
+        $ingredients = \App\Models\Ingredient::orderByDesc("created_at")->take(30)->get();
+        $recettes = \App\Models\Recette::orderByDesc("created_at")->take(30)->get();
+        return view("admin.dashboard")
+            ->with("ingredients",$ingredients)
+            ->with("recette",$recettes);
     });
     Route::resource('admin/ingredient', IngredientController::class);
     Route::post('admin/recette/ingredient_destroy', [RecetteController::class, 'ingredient_destroy']);
     Route::resource('admin/recette', RecetteController::class);
 });
 
+/*
+Route::group(['middleware' => 'auth'], function (){
+
+});
+*/
