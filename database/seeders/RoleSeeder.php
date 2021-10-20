@@ -23,7 +23,7 @@ class RoleSeeder extends Seeder
         $role_client = Role::create(["name" => "client"]);
 
         $permission = Permission::create(['name' => 'delete_ingredient']);
-
+        $permission_panel_admin = Permission::create(['name' => 'access_admin']);
         $role_admin->givePermissionTo(Permission::all());
         //$permission->assignRole($role_admin);
     }

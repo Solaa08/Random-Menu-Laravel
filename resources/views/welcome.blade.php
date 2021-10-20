@@ -13,8 +13,16 @@
                         <a class="nav-link" href="{{ url('contact') }}">Contact</a>
                         @if (Route::has('login'))
                             @auth
+                                @can('access_admin')
                                 <a href="{{ url('admin/recette') }}" class="nav-link">Administration</a>
-                                {{-- <a href="{{ route('logout') }}" class="nav-link">Déconnexion</a> --}}
+                                @endcan
+                                <a class="nav-link" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    {{ __('Deconnexion') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
                             @else
                                 <a href="{{ route('login') }}" class="nav-link">Connexion</a>
 
