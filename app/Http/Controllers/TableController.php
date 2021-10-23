@@ -87,6 +87,7 @@ class TableController extends Controller
             ->get();
 
         $html =
+        
         // <div id='refresh_menu_div_".$recette[0]->id."'>
             "
             <div class='d-flex flex-column'>

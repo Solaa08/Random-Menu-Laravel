@@ -24,9 +24,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard', function () {
-    return view('admin.dashboard');
-});
+// Route::get('/dashboard', function () {
+//     return view('admin.dashboard');
+// });
 Route::get('/contact', function () {
     return view('contact');
 });

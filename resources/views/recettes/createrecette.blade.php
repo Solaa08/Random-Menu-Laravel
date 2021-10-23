@@ -76,7 +76,7 @@
           </table>
 
           <button type="submit" class="btn btn-primary">Ajouter</button>
-          <a class="float-right" href="/recette">Retour</a>
+          <a class="float-right" href="../recette">Retour</a>
       </form>
   </div>
 </div>

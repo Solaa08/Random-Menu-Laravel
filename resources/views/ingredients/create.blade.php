@@ -40,7 +40,7 @@
               <input type="text" class="form-control" name="name"/>
           </div>
           <button type="submit" class="btn btn-primary">Ajouter</button>
-          <a class="float-right" href="/ingredient">Retour</a>
+          <a class="float-right" href="../ingredient">Retour</a>
       </form>
   </div>
 </div>
