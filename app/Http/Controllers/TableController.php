@@ -80,7 +80,12 @@ class TableController extends Controller
         $html =
             "
             <div class='d-flex flex-column'>
-            <button class='btn-refresh btn btn-dark float-right' data-type='".$request['type']."'style='width: 2.5rem; height: 2.5rem;'>⟳</button>
+            <div class='d-flex flex-row justify-content-around'>
+                <button 
+                    class='btn-refresh btn btn-dark float-right' 
+                    data-type='".$request['type']."'
+                    style='width: 2.5rem; height: 2.5rem;'>⟳
+                </button>
                 <button
                     class='btn-show btn btn-dark float-right'
                     id='show_btn_".$recette[0]->id."'
@@ -88,6 +93,8 @@ class TableController extends Controller
                     data-type='Entrée'
                     style='width: 2.5rem; height: 2.5rem;'>👁
                 </button>
+                </div>
+                <br>
                 <h3>".$request['type']."</h3>
                 <p id='recette_title_".$recette[0]->id."'>".$recette[0]->nom."</p>
             </div>

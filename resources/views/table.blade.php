@@ -44,56 +44,64 @@
                     </div>
                     <div>
                         <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_entree">
-                            <button
-                                class="btn-refresh btn btn-dark float-right"
-                                id="refresh_menu_btn_{{$entre[$i*$j]->id}}"
-                                data-type="Entrée"
-                                style="width: 2.5rem; height: 2.5rem;">⟳
-                            </button>
-                            <button
-                                class="btn-show btn btn-dark float-right"
-                                id="show_btn_{{$entre[$i*$j]->id}}"
-                                onclick="showRecette('{{$entre[$i*$j]->id}}')"
-                                data-type="Entrée" style="width: 2.5rem; height: 2.5rem;">👁
-                            </button>
+                            <div class="d-flex flex-row justify-content-around">
+                                <button
+                                    class="btn-refresh btn btn-dark float-right"
+                                    id="refresh_menu_btn_{{$entre[$i*$j]->id}}"
+                                    data-type="Entrée"
+                                    style="width: 2.5rem; height: 2.5rem;">⟳
+                                </button>
+                                <button
+                                    class="btn-show btn btn-dark float-right"
+                                    id="show_btn_{{$entre[$i*$j]->id}}"
+                                    onclick="showRecette('{{$entre[$i*$j]->id}}')"
+                                    data-type="Entrée" style="width: 2.5rem; height: 2.5rem;">👁
+                                </button>
+                            </div>
+                            <br>
                             {{-- <button class="btn btn-dark float-right" id="refresh_menu_btn_{{$entre[$i*$j]->id}}" onclick="refresh_menu('{{$entre[$i*$j]->id}}','Entrée')">+</button> --}}
-                            <h3>Entrée</h3>
+                            <h3 >Entrée</h3>
                             <p id="recette_title_{{$entre[$i*$j]->id}}">{{ $entre[$i*$j]->nom}}</p>
                         </div>
                         <hr>
                         <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_plat">
-                            <button
-                                class="btn-refresh btn btn-dark float-right"
-                                id="refresh_menu_btn_{{$plat[$i*$j]->id}}"
-                                data-type="Plat"
-                                style="width: 2.5rem; height: 2.5rem;">⟳
-                            </button>
-                            <button
-                                class="btn-show btn btn-dark float-right"
-                                id="show_btn_{{$entre[$i*$j]->id}}"
-                                onclick="showRecette('{{$plat[$i*$j]->id}}')"
-                                data-type="Entrée"
-                                style="width: 2.5rem; height: 2.5rem;">👁
-                            </button>
-
+                            <div class="d-flex flex-row justify-content-around">
+                                <button
+                                    class="btn-refresh btn btn-dark float-right"
+                                    id="refresh_menu_btn_{{$plat[$i*$j]->id}}"
+                                    data-type="Plat"
+                                    style="width: 2.5rem; height: 2.5rem;">⟳
+                                </button>
+                                <button
+                                    class="btn-show btn btn-dark float-right"
+                                    id="show_btn_{{$entre[$i*$j]->id}}"
+                                    onclick="showRecette('{{$plat[$i*$j]->id}}')"
+                                    data-type="Entrée"
+                                    style="width: 2.5rem; height: 2.5rem;">👁
+                                </button>
+                            </div>
+                            <br>
                             <h3>Plat</h3>
                             <p id="recette_title_{{$plat[$i*$j]->id}}">{{ $plat[$i*$j]->nom }}</p>
                         </div>
                         <hr>
                         <div class="d-flex flex-column" id="refresh_menu_div_{{$repas[$j-1]}}_{{$i}}_dessert">
-                            <button
-                                class="btn-refresh btn btn-dark float-right"
-                                id="refresh_menu_btn_{{$dessert[$i*$j]->id}}"
-                                data-type="Dessert"
-                                style="width: 2.5rem; height: 2.5rem;">⟳
-                            </button>
-                            <button
-                                class="btn-show btn btn-dark float-right"
-                                id="show_btn_{{$entre[$i*$j]->id}}"
-                                onclick="showRecette('{{$dessert[$i*$j]->id}}')"
-                                data-type="Entrée"
-                                style="width: 2.5rem; height: 2.5rem;">👁
-                            </button>
+                            <div class="d-flex flex-row justify-content-around">
+                                <button
+                                    class="btn-refresh btn btn-dark float-right"
+                                    id="refresh_menu_btn_{{$dessert[$i*$j]->id}}"
+                                    data-type="Dessert"
+                                    style="width: 2.5rem; height: 2.5rem;">⟳
+                                </button>
+                                <button
+                                    class="btn-show btn btn-dark float-right"
+                                    id="show_btn_{{$entre[$i*$j]->id}}"
+                                    onclick="showRecette('{{$dessert[$i*$j]->id}}')"
+                                    data-type="Entrée"
+                                    style="width: 2.5rem; height: 2.5rem;">👁
+                                </button>
+                            </div>
+                            <br>
                             <h3>Dessert</h3>
                             <p id="recette_title_{{$dessert[$i*$j]->id}}">{{ $dessert[$i*$j]->nom }}</p>
                         </div>
@@ -110,8 +118,6 @@
     </div>
 </div>
 
-<!-- Large modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
 
 <div id="modal_contenu_recette" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -126,7 +132,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Fermer</button>
             </div>
         </div>
     </div>
