@@ -151,7 +151,7 @@
         })
         .done(( contenu_html ) => {
             if (contenu_html !== ""){
-                $(e.currentTarget).parent().html(contenu_html);
+                $(e.currentTarget).parent().parent().html(contenu_html);
             }
         });
     }

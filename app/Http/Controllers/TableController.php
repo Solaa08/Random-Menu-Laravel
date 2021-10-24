@@ -79,10 +79,10 @@ class TableController extends Controller
 
         $html =
             "
-            <div class='d-flex flex-column'>
+            <div class='d-flex flex-column' id='".$recette[0]->id."'>
             <div class='d-flex flex-row justify-content-around'>
-                <button 
-                    class='btn-refresh btn btn-dark float-right' 
+                <button
+                    class='btn-refresh btn btn-dark float-right'
                     data-type='".$request['type']."'
                     style='width: 2.5rem; height: 2.5rem;'>⟳
                 </button>
