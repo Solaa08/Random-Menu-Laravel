@@ -38,7 +38,7 @@
 
             <div class="inner cover">
                 <h1 class="cover-heading">Le générateur de menus</h1>
-                <p class="lead">"Random Menu" permet de se générer des menus simples tout au long d'une semaine afin de faciliter sa façon de cuisiner.</p>
+                <p class="lead">"Random Menu" permet de se générer des menus simples tout au long d'une semaine afin de faciliter sa façon de cuisiner. test modif.</p>
                 <p class="lead">
                     @if (Route::has('login'))
                     @auth
