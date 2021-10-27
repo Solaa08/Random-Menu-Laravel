@@ -137,7 +137,7 @@
           </table>
 
           <button type="submit" class="btn btn-primary">Ajouter</button>
-          <a class="float-right" href="{{ url('admin/recette') }}">Retour</a>
+          <a class="float-right" href="{{ url('../recette') }}">Retour</a>
       </form>
   </div>
 </div>
@@ -152,28 +152,18 @@
             },
             language: {"url": "//cdn.datatables.net/plug-ins/1.10.24/i18n/French.json"},
         });
-
         let checkedVals = $('input[name="ingredient_check[]"]:checkbox:checked').map(function() {
             return this.value;
         }).get();
-        console.log(checkedVals);
         $('#recette_update').submit(function(event) {
-            //checkboxes should have a general class to traverse
             let rowcollection = table.$("input:checked", {"page": "all"});
-
-            //Now loop through all the selected checkboxes to perform desired actions
             let checkedVals = [];
             rowcollection.each(function(index,elem){
-                //You have access to the current iterating row
                 checkedVals.push($(elem).val());
-                //Do something with 'checkbox_value'
             });
-
             let checkedVals_json = JSON.stringify(checkedVals);
-            console.log(checkedVals);
             $('#ingredient_id').val(checkedVals_json);
         });
-
     });
 </script>
 
